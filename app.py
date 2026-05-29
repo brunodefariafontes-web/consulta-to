@@ -18,6 +18,7 @@ st.set_page_config(
 page_bg = """
 <style>
 
+/* FUNDO */
 [data-testid="stAppViewContainer"]::before{
     content: "";
     position: fixed;
@@ -40,55 +41,54 @@ page_bg = """
 }
 
 /* =====================
-   HIERARQUIA VISUAL (IMPORTANTE)
+   TÍTULO
    ===================== */
-
-/* TÍTULO PRINCIPAL */
 h1 {
     color: white !important;
-    font-size: 34px !important;
-    font-weight: 800 !important;
+    font-size: 34px;
+    font-weight: 800;
 }
 
-/* SUBTÍTULO */
-.subtitle {
-    color: rgba(255,255,255,0.8);
-    font-size: 16px;
-    margin-bottom: 20px;
+/* =====================
+   CARDS (MELHORA PRINCIPAL)
+   ===================== */
+
+/* CARD GERAL */
+.block-card {
+    background: rgba(255,255,255,0.92);
+    padding: 18px;
+    border-radius: 14px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.3);
 }
 
-/* BLOCO DE INPUT DESTACADO */
-div[data-baseweb="input"] {
+/* texto dentro dos cards */
+.block-card label,
+.block-card div,
+.block-card span {
+    color: #111 !important;
+}
+
+/* INPUTS DENTRO DO CARD */
+.block-card input {
     background: white !important;
-    border-radius: 10px;
-    padding: 8px;
-    border: 2px solid rgba(255,255,255,0.2);
-}
-
-/* TEXTO DENTRO DO INPUT */
-input {
     color: black !important;
     font-weight: 600;
 }
 
-/* PLACEHOLDER */
-input::placeholder {
-    color: rgba(0,0,0,0.4) !important;
-}
-
 /* BOTÃO */
 button {
-    background: #ffffff !important;
-    color: black !important;
+    background: #111 !important;
+    color: white !important;
     font-weight: 700 !important;
     border-radius: 8px !important;
 }
 
-/* RESULTADO EM BLOCOS */
+/* DATAFRAME */
 .stDataFrame {
     background: rgba(255,255,255,0.95) !important;
     border-radius: 10px;
-    padding: 10px;
 }
 
 </style>
@@ -122,23 +122,17 @@ dados = sheet.get_all_records()
 df = pd.DataFrame(dados)
 
 # =====================
-# HEADER CLARO
+# HEADER
 # =====================
 st.title("✈ CONSULTA T.O.")
 
-st.markdown(
-    '<div class="subtitle">Digite o Part Number abaixo para consultar</div>',
-    unsafe_allow_html=True
-)
+# =====================
+# PN (AGORA DESTACADO)
+# =====================
+st.markdown('<div class="block-card">', unsafe_allow_html=True)
 
-# =====================
-# INPUT (AGORA CLARO)
-# =====================
-pesquisa = st.text_input("🔎 Part Number")
+pesquisa = st.text_input("🔎 Digite o Part Number")
 
-# =====================
-# RESULTADO
-# =====================
 if pesquisa:
 
     resultado = df[
@@ -153,16 +147,19 @@ if pesquisa:
     else:
         st.error("Nenhum Part Number encontrado")
 
+st.markdown('</div>', unsafe_allow_html=True)
+
 # =====================
-# ADICIONAR ITEM
+# ADICIONAR ITEM (OUTRO CARD)
 # =====================
-st.divider()
-st.subheader("➕ Adicionar novo item")
+st.markdown('<div class="block-card">', unsafe_allow_html=True)
+
+st.subheader("➕ Adicionar Novo Item")
 
 with st.form("novo_item", clear_on_submit=True):
 
-    pn = st.text_input("Digite o Part Number (PN)")
-    to = st.text_input("Digite o T.O.")
+    pn = st.text_input("Part Number")
+    to = st.text_input("T.O.")
 
     salvar = st.form_submit_button("SALVAR")
 
@@ -174,3 +171,5 @@ with st.form("novo_item", clear_on_submit=True):
             st.rerun()
         else:
             st.warning("Preencha todos os campos")
+
+st.markdown('</div>', unsafe_allow_html=True)
