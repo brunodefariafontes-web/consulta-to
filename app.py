@@ -4,6 +4,42 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 # =====================
+# ESTILO FAB / GRIPEN
+# =====================
+page_bg = """
+<style>
+
+[data-testid="stAppViewContainer"]{
+background-image: url("https://upload.wikimedia.org/wikipedia/commons/2/2d/Saab_JAS_39_Gripen_-_RIAT_2013_%289528781376%29.jpg");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+
+[data-testid="stHeader"]{
+background: rgba(0,0,0,0);
+}
+
+.stApp{
+background: rgba(0,0,0,0.70);
+color: white;
+}
+
+h1, h2, h3, p, label, div{
+color: white !important;
+}
+
+[data-testid="stSidebar"]{
+background: rgba(0,0,0,0.5);
+}
+
+</style>
+"""
+
+st.markdown(page_bg, unsafe_allow_html=True)
+
+# =====================
 # CONFIG
 # =====================
 st.set_page_config(
@@ -42,6 +78,11 @@ df = pd.DataFrame(dados)
 # TITULO
 # =====================
 st.title("✈ CONSULTA T.O.")
+
+st.image(
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Bras%C3%A3o_da_For%C3%A7a_A%C3%A9rea_Brasileira.svg/800px-Bras%C3%A3o_da_For%C3%A7a_A%C3%A9rea_Brasileira.svg.png",
+    width=120
+)
 
 st.write(
     "Pesquisa rápida de Part Number"
@@ -129,4 +170,4 @@ with st.form(
 
             st.warning(
                 "Preencha todos os campos"
-            )
+            )```
