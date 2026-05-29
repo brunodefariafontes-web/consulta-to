@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # =====================
-# FUNDO GRIPEN (DISCRETO E ESTÁVEL)
+# FUNDO RESPONSIVO (PC + CELULAR IGUAL)
 # =====================
 page_bg = """
 <style>
@@ -21,16 +21,19 @@ page_bg = """
 /* FUNDO PRINCIPAL */
 [data-testid="stAppViewContainer"]{
 background-image: url("https://res.cloudinary.com/dkkd45ayz/image/upload/c_scale,w_2048/episerver/071584a2-31d6-4c72-bae3-343a753229e6/gripen-e_jer_4875.jpg");
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
-background-attachment: fixed;
 
-/* suaviza imagem */
+background-size: cover;
+background-position: center center;
+background-repeat: no-repeat;
+
+/* IMPORTANTE: evita bug no celular */
+background-attachment: scroll;
+
+/* ajuste visual */
 filter: brightness(0.55) contrast(0.95);
 }
 
-/* remove overlay antigo que pode quebrar layout */
+/* remove overlay antigo */
 .stApp::before{
 display: none;
 }
@@ -46,7 +49,7 @@ background: rgba(0,0,0,0);
 }
 
 /* =====================
-   TEXTOS (FORA DOS INPUTS)
+   TEXTOS
    ===================== */
 
 h1, h2, h3 {
@@ -58,7 +61,7 @@ color: rgba(255, 255, 255, 0.90) !important;
 }
 
 /* =====================
-   INPUTS (LEGÍVEIS)
+   INPUTS
    ===================== */
 
 div[data-baseweb="input"],
@@ -71,13 +74,13 @@ div[data-baseweb="select"],
     padding: 10px;
 }
 
-/* TEXTO DENTRO DOS INPUTS */
+/* texto dentro dos inputs */
 input, textarea {
     color: #111111 !important;
     font-weight: 500;
 }
 
-/* PLACEHOLDER */
+/* placeholder */
 input::placeholder {
     color: rgba(255, 255, 255, 0.5) !important;
 }
@@ -85,6 +88,14 @@ input::placeholder {
 /* SIDEBAR */
 [data-testid="stSidebar"]{
 background: rgba(0,0,0,0.5);
+}
+
+/* RESPONSIVO EXTRA */
+@media only screen and (max-width: 768px) {
+[data-testid="stAppViewContainer"]{
+background-position: center top;
+background-size: cover;
+}
 }
 
 </style>
