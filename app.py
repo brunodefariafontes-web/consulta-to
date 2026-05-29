@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # =====================
-# CSS (FUNDO D'ÁGUA + TEXTO BRANCO)
+# CSS FINAL
 # =====================
 st.markdown("""
 <style>
@@ -26,8 +26,6 @@ st.markdown("""
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-
-    /* efeito d'água */
     background-color: rgba(0,0,0,0.88);
     background-blend-mode: darken;
 }
@@ -35,29 +33,23 @@ st.markdown("""
 /* =====================
    TEXTO FIXO BRANCO
    ===================== */
-h1, h2, h3 {
+h1, h2, h3, p, span, label {
     color: white !important;
 }
 
-p, span, label {
-    color: white !important;
-}
-
-/* botão branco */
+/* =====================
+   BOTÃO (SÓ TEXTO PRETO)
+   ===================== */
 .stButton > button {
-    color: white !important;
+    color: #000000 !important;
     font-weight: 700 !important;
 }
 
 /* =====================
-   INPUTS (NÃO ALTERA VISUAL)
+   INPUTS
    ===================== */
 .stTextInput input,
-.stTextArea textarea {
-    background-color: #ffffff !important;
-    color: #000000 !important;
-}
-
+.stTextArea textarea,
 div[data-baseweb="input"] input,
 div[data-baseweb="textarea"] textarea {
     background-color: #ffffff !important;
