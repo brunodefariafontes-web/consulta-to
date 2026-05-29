@@ -1,3 +1,4 @@
+```python
 import streamlit as st
 import pandas as pd
 import gspread
@@ -9,7 +10,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 st.set_page_config(
     page_title="Consulta T.O.",
     page_icon="✈",
-    layout="wide"
+    layout="centered"
 )
 
 # =====================
@@ -21,7 +22,7 @@ scope = [
 ]
 
 creds = ServiceAccountCredentials.from_json_keyfile_dict(
-    st.secrets,
+    dict(st.secrets),
     scope
 )
 
@@ -39,19 +40,19 @@ dados = sheet.get_all_records()
 df = pd.DataFrame(dados)
 
 # =====================
-# TITULO
+# TÍTULO
 # =====================
 st.title("✈ CONSULTA T.O.")
 
 st.write(
-    "Pesquisa rápida de Part Number"
+    "Digite o Part Number para localizar a T.O."
 )
 
 # =====================
 # PESQUISA
 # =====================
 pesquisa = st.text_input(
-    "Digite o Part Number"
+    "Part Number"
 )
 
 # =====================
@@ -62,83 +63,33 @@ if pesquisa:
     resultado = df[
         df.iloc[:, 0]
         .astype(str)
-        .str.contains(
-            pesquisa,
-            case=False,
-            na=False
-        )
+        .str.upper()
+        == pesquisa.upper()
     ]
+
+    st.divider()
 
     if not resultado.empty:
 
-        st.success(
-            f"{len(resultado)} resultado(s) encontrado(s)"
-        )
+        to = resultado.iloc[0, 1]
 
-        st.dataframe(
-            resultado,
-            use_container_width=True
+        st.success("T.O. localizada com sucesso")
+
+        st.markdown(
+            f"""
+            ## ✈ Resultado
+
+            ### PN:
+            `{pesquisa}`
+
+            ### T.O.:
+            `{to}`
+            """
         )
 
     else:
 
         st.error(
-            "Nenhum Part Number encontrado"
+            "Part Number não encontrado"
         )
-
-# =====================
-# ADICIONAR ITEM
-# =====================
-st.divider()
-
-st.subheader("➕ Adicionar Novo Item")
-
-with st.form(
-    "novo_item",
-    clear_on_submit=True
-):
-
-    pn = st.text_input(
-        "Part Number"
-    )
-
-    to = st.text_input(
-        "T.O."
-    )
-
-    salvar = st.form_submit_button(
-        "Salvar"
-    )
-
-    if salvar:
-
-        if pn and to:
-
-            sheet.append_row([
-                pn,
-                to
-            ])
-
-            st.success(
-                "Item salvo com sucesso ✔"
-            )
-
-            st.rerun()
-
-        else:
-
-            st.warning(
-                "Preencha todos os campos"
-            )
-
-# =====================
-# BASE COMPLETA
-# =====================
-st.divider()
-
-st.subheader("📋 Base AFCAV")
-
-st.dataframe(
-    df,
-    use_container_width=True
-)
+```
