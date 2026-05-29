@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # =====================
-# FUNDO (MANTIDO COMO ESTAVA BOM)
+# FUNDO (MANTIDO)
 # =====================
 page_bg = """
 <style>
@@ -58,40 +58,51 @@ p, label, span {
 }
 
 /* =====================
-   INPUTS (PN E T.O.)
+   INPUTS (CORRIGIDO DE VERDADE)
    ===================== */
+
+/* input interno do Streamlit */
+div[data-baseweb="input"] input,
+div[data-baseweb="textarea"] textarea {
+    color: #000000 !important;
+    font-weight: 600 !important;
+}
+
+/* fallback universal */
+input, textarea {
+    color: #000000 !important;
+    font-weight: 600 !important;
+}
+
+/* fundo dos campos */
 div[data-baseweb="input"],
 div[data-baseweb="select"],
 .stTextInput,
 .stForm {
-    background: rgba(25, 25, 25, 0.75) !important;
+    background: rgba(255,255,255,0.95) !important;
     border-radius: 10px;
     padding: 10px;
 }
 
-/* 🔥 TEXTO QUE VOCÊ DIGITA (AGORA CORRETO) */
-input, textarea {
-    color: #ffffff !important;
-    font-weight: 600;
-}
-
 /* placeholder */
 input::placeholder {
-    color: rgba(255,255,255,0.5) !important;
+    color: rgba(0,0,0,0.4) !important;
 }
 
 /* =====================
-   🔥 BOTÃO SALVAR (CORRIGIDO)
+   BOTÃO SALVAR (CORRIGIDO FINAL)
    ===================== */
-button[kind="primary"] {
+
+.stButton > button {
     background: #ffffff !important;
     color: #000000 !important;
     font-weight: 800 !important;
     border-radius: 8px !important;
-    border: 1px solid rgba(0,0,0,0.2);
+    border: 1px solid rgba(0,0,0,0.25) !important;
 }
 
-button {
+/* texto interno do botão */
+.stButton > button p {
     color: #000000 !important;
 }
 
@@ -131,7 +142,7 @@ dados = sheet.get_all_records()
 df = pd.DataFrame(dados)
 
 # =====================
-# TITULO
+# TÍTULO
 # =====================
 st.title("✈ CONSULTA T.O.")
 st.write("Pesquisa rápida de Part Number")
