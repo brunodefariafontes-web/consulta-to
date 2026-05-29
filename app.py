@@ -130,15 +130,3 @@ with st.form(
             st.warning(
                 "Preencha todos os campos"
             )
-
-# =====================
-# BASE COMPLETA
-# =====================
-st.divider()
-
-st.subheader("📋 Base AFCAV")
-
-st.dataframe(
-    df,
-    use_container_width=True
-)
