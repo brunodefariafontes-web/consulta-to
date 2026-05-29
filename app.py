@@ -13,12 +13,12 @@ st.set_page_config(
 )
 
 # =====================
-# FUNDO (DISCRETO E ESTÁVEL)
+# FUNDO (GRIPEN DISCRETO)
 # =====================
 page_bg = """
 <style>
 
-/* FUNDO PRINCIPAL */
+/* FUNDO */
 [data-testid="stAppViewContainer"]{
 background-image: url("https://res.cloudinary.com/dkkd45ayz/image/upload/c_scale,w_2048/episerver/071584a2-31d6-4c72-bae3-343a753229e6/gripen-e_jer_4875.jpg");
 background-size: cover;
@@ -26,11 +26,10 @@ background-position: center;
 background-repeat: no-repeat;
 background-attachment: fixed;
 
-/* reduz agressividade do fundo */
 filter: brightness(0.55) contrast(0.95);
 }
 
-/* remove overlay que causava tela branca */
+/* remove overlay antigo */
 .stApp::before{
 display: none;
 }
@@ -45,20 +44,36 @@ background: rgba(0,0,0,0.55);
 background: rgba(0,0,0,0);
 }
 
-/* CAIXAS E FORMULÁRIOS */
+/* =====================
+   TEXTO AJUSTADO
+   ===================== */
+
+h1, h2, h3 {
+color: white !important;
+}
+
+p, label {
+color: rgba(255, 255, 255, 0.90) !important;
+}
+
+span, div {
+color: rgba(255, 255, 255, 0.88) !important;
+}
+
+/* INPUTS */
+input, textarea {
+color: white !important;
+}
+
+/* CAIXAS */
 div[data-baseweb="input"],
 div[data-baseweb="select"],
 .stTextInput,
 .stForm,
 .stDataFrame {
-background: rgba(20, 20, 20, 0.60) !important;
+background: rgba(20, 20, 20, 0.65) !important;
 border-radius: 10px;
 padding: 10px;
-}
-
-/* TEXTO */
-h1, h2, h3, p, label, div {
-color: white !important;
 }
 
 /* SIDEBAR */
