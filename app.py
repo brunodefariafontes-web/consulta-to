@@ -38,14 +38,17 @@ h1, h2, h3, p, span, label {
 }
 
 /* =====================
-   BOTÃO (TEXTO PRETO)
+   BOTÃO (COR CORRETA)
    ===================== */
 .stButton > button {
-    color: #000000 !important;
+    background-color: #ffffff !important;  /* fundo branco visível */
+    color: #000000 !important;             /* texto preto */
     font-weight: 700 !important;
+    border: 1px solid #cccccc !important;
+    border-radius: 6px;
 }
 
-/* reforço para streamlit sobrescrito */
+/* reforço interno do texto */
 .stButton > button p {
     color: #000000 !important;
 }
