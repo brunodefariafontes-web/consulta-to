@@ -13,13 +13,13 @@ st.set_page_config(
 )
 
 # =====================
-# CSS FINAL (FUNDO D'ÁGUA FRACO)
+# CSS FINAL (FUNDO SUAVE + LEITURA PERFEITA)
 # =====================
 st.markdown("""
 <style>
 
 /* =====================
-   FUNDO D'ÁGUA (BEM FRACO)
+   FUNDO MARCA D’ÁGUA SUAVE
    ===================== */
 .stApp {
     background-image: url("https://res.cloudinary.com/dkkd45ayz/image/upload/f_auto,dpr_auto,q_auto,fl_progressive/w_2048,h_1152,c_scale/episerver/071584a2-31d6-4c72-bae3-343a753229e6/gripen-e_jer_4875.jpg");
@@ -27,24 +27,23 @@ st.markdown("""
     background-position: center;
     background-repeat: no-repeat;
 
-    /* efeito marca d'água */
-    background-blend-mode: overlay;
-    background-color: rgba(0, 0, 0, 0.75);
+    /* bem escuro pra leitura */
+    background-color: rgba(0, 0, 0, 0.88);
+    background-blend-mode: darken;
 }
 
 /* =====================
-   INPUTS (BRANCO + PRETO)
+   INPUTS (BRANCO + TEXTO PRETO)
    ===================== */
 .stTextInput input,
 .stTextArea textarea {
     background-color: #ffffff !important;
     color: #000000 !important;
     font-weight: 600 !important;
-    border: 1px solid #d0d0d0 !important;
-    border-radius: 6px !important;
+    border-radius: 6px;
 }
 
-/* Streamlit inputs internos */
+/* inputs reais do Streamlit */
 div[data-baseweb="input"] input,
 div[data-baseweb="textarea"] textarea {
     background-color: #ffffff !important;
@@ -56,12 +55,15 @@ input::placeholder {
     color: rgba(0,0,0,0.4) !important;
 }
 
-/* BOTÃO */
+/* =====================
+   BOTÃO
+   ===================== */
 .stButton > button {
-    background: #ffffff !important;
+    background-color: #ffffff !important;
     color: #000000 !important;
     font-weight: 700 !important;
     border-radius: 6px;
+    border: 1px solid rgba(0,0,0,0.2);
 }
 
 </style>
