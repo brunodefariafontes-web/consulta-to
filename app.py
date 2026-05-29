@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # =====================
-# CSS FINAL
+# CSS FINAL (PADRÃO ÚNICO)
 # =====================
 page_bg = """
 <style>
@@ -48,6 +48,7 @@ label {
     font-weight: 700 !important;
 }
 
+/* títulos */
 h1, h2, h3 {
     color: white !important;
 }
@@ -57,7 +58,7 @@ p, span {
 }
 
 /* =====================
-   INPUTS (BUSCA + FORM + ADICIONAR ITEM)
+   🔥 PADRÃO ÚNICO DOS INPUTS (PN + FORM)
    ===================== */
 input, textarea {
     background-color: #ffffff !important;
@@ -73,21 +74,19 @@ div[data-baseweb="textarea"] textarea {
     font-weight: 600 !important;
 }
 
-/* caixas dos inputs (inclusive form) */
+/* caixas externas (BUSCA + FORM) */
 .stTextInput, .stTextArea {
     background-color: #ffffff !important;
-}
-
-/* FORMULÁRIO (IMPORTANTE — aqui estava faltando) */
-.stForm {
-    background: rgba(255,255,255,0.08) !important;
-    padding: 15px;
-    border-radius: 10px;
 }
 
 /* placeholder */
 input::placeholder {
     color: rgba(0,0,0,0.4) !important;
+}
+
+/* FORM (AGORA IGUAL AO PN, SEM DIFERENÇA VISUAL) */
+.stForm {
+    background: transparent !important;
 }
 
 /* BOTÃO */
@@ -136,13 +135,10 @@ st.title("✈ CONSULTA T.O.")
 st.write("Pesquisa rápida de Part Number")
 
 # =====================
-# PESQUISA
+# PESQUISA (PN)
 # =====================
 pesquisa = st.text_input("🔎 Digite o Part Number")
 
-# =====================
-# RESULTADO
-# =====================
 if pesquisa:
 
     resultado = df[
@@ -158,7 +154,7 @@ if pesquisa:
         st.error("Nenhum Part Number encontrado")
 
 # =====================
-# ADICIONAR ITEM (CORRIGIDO IGUAL PN)
+# ADICIONAR ITEM (MESMO PADRÃO DO PN)
 # =====================
 st.divider()
 st.subheader("➕ Adicionar Novo Item")
