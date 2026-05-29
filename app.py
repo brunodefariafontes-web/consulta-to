@@ -47,7 +47,7 @@ page_bg = """
 }
 
 /* =====================
-   TEXTO GERAL (MANTIDO)
+   TEXTO GERAL
    ===================== */
 h1, h2, h3 {
     color: white !important;
@@ -58,31 +58,38 @@ p, label, span {
 }
 
 /* =====================
-   🔥 CORREÇÃO SOMENTE DO PN/T.O.
+   🔥 CORREÇÃO FINAL INPUTS (CERTO AGORA)
    ===================== */
 
-/* campo real do Streamlit */
+/* TODOS os inputs (Streamlit + HTML normal) */
+input, textarea {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-weight: 600 !important;
+}
+
+/* Streamlit BaseWeb inputs (os reais que quebram tudo) */
 div[data-baseweb="input"] input,
 div[data-baseweb="textarea"] textarea {
-    color: #ffffff !important;
-    font-weight: 600;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-weight: 600 !important;
 }
 
-/* fallback garantido */
-.stTextInput input,
-.stTextArea textarea {
-    color: #ffffff !important;
-    font-weight: 600;
+/* caixas externas */
+.stTextInput, .stTextArea {
+    background-color: #ffffff !important;
 }
 
-/* placeholder (opcional, só pra não sumir) */
+/* placeholder */
 input::placeholder {
-    color: rgba(255,255,255,0.5) !important;
+    color: rgba(0,0,0,0.4) !important;
 }
 
-/* SIDEBAR (MANTIDO) */
-[data-testid="stSidebar"]{
-    background: rgba(0,0,0,0.55);
+/* botão (mantém visível) */
+.stButton > button {
+    color: #000000 !important;
+    font-weight: 700 !important;
 }
 
 </style>
