@@ -13,35 +13,44 @@ st.set_page_config(
 )
 
 # =====================
-# CSS (TUDO TEXTO FIXO EM BRANCO)
+# CSS (FUNDO + TEXTO BRANCO)
 # =====================
 st.markdown("""
 <style>
 
 /* =====================
-   TÍTULOS
+   FUNDO COM IMAGEM
+   ===================== */
+.stApp {
+    background-image: url("https://res.cloudinary.com/dkkd45ayz/image/upload/f_auto,dpr_auto,q_auto,fl_progressive/w_2048,h_1152,c_scale/episerver/071584a2-31d6-4c72-bae3-343a753229e6/gripen-e_jer_4875.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* escurecimento pra leitura */
+    background-color: rgba(0, 0, 0, 0.88);
+    background-blend-mode: darken;
+}
+
+/* =====================
+   TEXTO FIXO EM BRANCO
    ===================== */
 h1, h2, h3 {
     color: #ffffff !important;
 }
 
-/* =====================
-   TEXTOS FIXOS (WRITE, LABELS, ETC)
-   ===================== */
 p, span, label {
     color: #ffffff !important;
 }
 
-/* =====================
-   TEXTO DO BOTÃO
-   ===================== */
+/* botão texto branco */
 .stButton > button {
     color: #ffffff !important;
     font-weight: 700 !important;
 }
 
 /* =====================
-   NÃO ALTERA INPUTS (IMPORTANTE)
+   NÃO ALTERA INPUTS
    ===================== */
 
 </style>
