@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # =====================
-# FUNDO (MANTIDO IGUAL)
+# CSS FINAL
 # =====================
 page_bg = """
 <style>
@@ -41,34 +41,34 @@ page_bg = """
     background: rgba(0,0,0,0.60);
 }
 
-/* HEADER */
-[data-testid="stHeader"]{
-    background: rgba(0,0,0,0);
+/* =====================
+   LABELS VISÍVEIS
+   ===================== */
+label {
+    color: #000000 !important;
+    font-weight: 700 !important;
 }
 
-/* =====================
-   TEXTO GERAL
-   ===================== */
+/* títulos */
 h1, h2, h3 {
     color: white !important;
 }
 
-p, label, span {
+/* textos gerais */
+p, span {
     color: rgba(255,255,255,0.90) !important;
 }
 
 /* =====================
-   🔥 CORREÇÃO FINAL INPUTS (CERTO AGORA)
+   INPUTS (BRANCO + TEXTO PRETO)
    ===================== */
-
-/* TODOS os inputs (Streamlit + HTML normal) */
 input, textarea {
     background-color: #ffffff !important;
     color: #000000 !important;
     font-weight: 600 !important;
 }
 
-/* Streamlit BaseWeb inputs (os reais que quebram tudo) */
+/* Streamlit input real */
 div[data-baseweb="input"] input,
 div[data-baseweb="textarea"] textarea {
     background-color: #ffffff !important;
@@ -76,7 +76,7 @@ div[data-baseweb="textarea"] textarea {
     font-weight: 600 !important;
 }
 
-/* caixas externas */
+/* caixa externa */
 .stTextInput, .stTextArea {
     background-color: #ffffff !important;
 }
@@ -86,10 +86,15 @@ input::placeholder {
     color: rgba(0,0,0,0.4) !important;
 }
 
-/* botão (mantém visível) */
+/* =====================
+   BOTÃO
+   ===================== */
 .stButton > button {
+    background: #ffffff !important;
     color: #000000 !important;
-    font-weight: 700 !important;
+    font-weight: 800 !important;
+    border-radius: 8px !important;
+    border: 1px solid rgba(0,0,0,0.2);
 }
 
 </style>
