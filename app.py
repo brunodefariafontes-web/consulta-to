@@ -1,7 +1,9 @@
 page_bg = """
 <style>
 
-/* FUNDO MANTIDO (NÃO MEXE) */
+/* =====================
+   FUNDO (INALTERADO)
+   ===================== */
 [data-testid="stAppViewContainer"]::before{
     content: "";
     position: fixed;
@@ -24,48 +26,50 @@ page_bg = """
 }
 
 /* =====================
-   🔥 TEXTO DA PÁGINA (LABELS + TEXTOS)
+   🔥 APENAS TEXTOS SEGURAMENTE CONTROLADOS
    ===================== */
 
-/* títulos */
+/* título */
 h1, h2, h3 {
     color: #ffffff !important;
 }
 
-/* textos gerais da página */
-p, span, div {
-    color: #ffffff !important;
-}
-
-/* labels dos campos (PN, T.O etc) */
+/* labels (PN / T.O.) */
 label {
     color: #ffffff !important;
     font-weight: 700 !important;
 }
 
+/* textos da interface (SEM quebrar componentes internos) */
+p {
+    color: rgba(255,255,255,0.85) !important;
+}
+
 /* =====================
-   🔥 TEXTO DIGITADO NOS CAMPOS (PN / T.O.)
+   🔥 INPUTS (CORRETO E ESTÁVEL)
    ===================== */
 input, textarea {
+    background-color: #ffffff !important;
     color: #000000 !important;
     font-weight: 600 !important;
 }
 
-/* Streamlit inputs reais */
+/* Streamlit base inputs */
 div[data-baseweb="input"] input,
 div[data-baseweb="textarea"] textarea {
+    background-color: #ffffff !important;
     color: #000000 !important;
     font-weight: 600 !important;
 }
 
-/* =====================
-   PLACEHOLDER (opcional)
-   ===================== */
+/* placeholder */
 input::placeholder {
     color: rgba(0,0,0,0.4) !important;
 }
 
-/* BOTÃO MANTIDO VISÍVEL */
+/* =====================
+   BOTÃO
+   ===================== */
 .stButton > button {
     color: #000000 !important;
     font-weight: 700 !important;
