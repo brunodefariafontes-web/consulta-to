@@ -13,14 +13,11 @@ st.set_page_config(
 )
 
 # =====================
-# FUNDO (PC + MOBILE DIFERENTE)
+# FUNDO (DISCRETO)
 # =====================
 page_bg = """
 <style>
 
-/* =========================
-   DESKTOP (horizontal)
-   ========================= */
 [data-testid="stAppViewContainer"]::before{
     content: "";
     position: fixed;
@@ -34,73 +31,64 @@ page_bg = """
     background-position: center;
     background-repeat: no-repeat;
 
-    filter: brightness(0.55) contrast(0.95);
+    filter: brightness(0.45);
     z-index: -1;
 }
 
-/* =========================
-   MOBILE (simula imagem "em pé")
-   ========================= */
-@media only screen and (max-width: 768px) {
-
-[data-testid="stAppViewContainer"]::before{
-    background-image: url("https://res.cloudinary.com/dkkd45ayz/image/upload/c_scale,w_2048/episerver/071584a2-31d6-4c72-bae3-343a753229e6/gripen-e_jer_4875.jpg");
-
-    /* recorte vertical simulado */
-    background-position: center top;
-    background-size: 200% auto;
-}
-}
-
-/* fundo geral */
 .stApp{
-background: rgba(0,0,0,0.55);
-}
-
-/* HEADER */
-[data-testid="stHeader"]{
-background: rgba(0,0,0,0);
+    background: rgba(0,0,0,0.60);
 }
 
 /* =====================
-   TEXTO GERAL
+   HIERARQUIA VISUAL (IMPORTANTE)
    ===================== */
-h1, h2, h3 {
-color: white !important;
+
+/* TÍTULO PRINCIPAL */
+h1 {
+    color: white !important;
+    font-size: 34px !important;
+    font-weight: 800 !important;
 }
 
-p, label, span {
-color: rgba(255,255,255,0.92) !important;
+/* SUBTÍTULO */
+.subtitle {
+    color: rgba(255,255,255,0.8);
+    font-size: 16px;
+    margin-bottom: 20px;
 }
 
-/* =====================
-   INPUTS (CORRETO AGORA)
-   ===================== */
-input, textarea {
-color: black !important;
-font-weight: 500;
+/* BLOCO DE INPUT DESTACADO */
+div[data-baseweb="input"] {
+    background: white !important;
+    border-radius: 10px;
+    padding: 8px;
+    border: 2px solid rgba(255,255,255,0.2);
 }
 
-/* caixas */
-div[data-baseweb="input"],
-div[data-baseweb="select"],
-.stTextInput,
-.stForm,
+/* TEXTO DENTRO DO INPUT */
+input {
+    color: black !important;
+    font-weight: 600;
+}
+
+/* PLACEHOLDER */
+input::placeholder {
+    color: rgba(0,0,0,0.4) !important;
+}
+
+/* BOTÃO */
+button {
+    background: #ffffff !important;
+    color: black !important;
+    font-weight: 700 !important;
+    border-radius: 8px !important;
+}
+
+/* RESULTADO EM BLOCOS */
 .stDataFrame {
     background: rgba(255,255,255,0.95) !important;
     border-radius: 10px;
     padding: 10px;
-}
-
-/* BOTÃO VISÍVEL */
-button {
-color: black !important;
-font-weight: 600;
-}
-
-/* SIDEBAR */
-[data-testid="stSidebar"]{
-background: rgba(0,0,0,0.55);
 }
 
 </style>
@@ -134,15 +122,19 @@ dados = sheet.get_all_records()
 df = pd.DataFrame(dados)
 
 # =====================
-# TITULO
+# HEADER CLARO
 # =====================
 st.title("✈ CONSULTA T.O.")
-st.write("Pesquisa rápida de Part Number")
+
+st.markdown(
+    '<div class="subtitle">Digite o Part Number abaixo para consultar</div>',
+    unsafe_allow_html=True
+)
 
 # =====================
-# PESQUISA
+# INPUT (AGORA CLARO)
 # =====================
-pesquisa = st.text_input("Digite o Part Number")
+pesquisa = st.text_input("🔎 Part Number")
 
 # =====================
 # RESULTADO
@@ -165,23 +157,20 @@ if pesquisa:
 # ADICIONAR ITEM
 # =====================
 st.divider()
-st.subheader("➕ Adicionar Novo Item")
+st.subheader("➕ Adicionar novo item")
 
 with st.form("novo_item", clear_on_submit=True):
 
-    pn = st.text_input("Part Number")
-    to = st.text_input("T.O.")
+    pn = st.text_input("Digite o Part Number (PN)")
+    to = st.text_input("Digite o T.O.")
 
-    salvar = st.form_submit_button("Salvar")
+    salvar = st.form_submit_button("SALVAR")
 
     if salvar:
 
         if pn and to:
-
             sheet.append_row([pn, to])
-
             st.success("Item salvo com sucesso ✔")
             st.rerun()
-
         else:
             st.warning("Preencha todos os campos")
