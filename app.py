@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # =====================
-# FUNDO (GRIPEN DISCRETO)
+# FUNDO DISCRETO (VERSÃO BOA)
 # =====================
 page_bg = """
 <style>
@@ -26,15 +26,16 @@ background-position: center;
 background-repeat: no-repeat;
 background-attachment: fixed;
 
+/* equilíbrio visual */
 filter: brightness(0.55) contrast(0.95);
 }
 
-/* remove overlay antigo */
+/* remove overlays problemáticos */
 .stApp::before{
 display: none;
 }
 
-/* camada escura para leitura */
+/* camada escura suave para leitura */
 .stApp{
 background: rgba(0,0,0,0.55);
 }
@@ -45,7 +46,7 @@ background: rgba(0,0,0,0);
 }
 
 /* =====================
-   TEXTO FORA DOS INPUTS
+   TEXTO LIMPO
    ===================== */
 
 h1, h2, h3 {
@@ -56,32 +57,28 @@ p, label {
 color: rgba(255, 255, 255, 0.90) !important;
 }
 
-span, div {
-color: rgba(255, 255, 255, 0.88) !important;
-}
-
 /* =====================
-   INPUTS BRANCOS (NOVO ESTILO)
+   INPUTS ESCUROS (MELHOR CONTRASTE)
    ===================== */
 
 div[data-baseweb="input"],
 div[data-baseweb="select"],
 .stTextInput,
-.stForm {
-    background: rgba(255, 255, 255, 0.95) !important;
+.stForm,
+.stDataFrame {
+    background: rgba(20, 20, 20, 0.65) !important;
     border-radius: 10px;
     padding: 10px;
 }
 
-/* TEXTO DENTRO DOS INPUTS */
+/* texto dentro dos inputs */
 input, textarea {
-    color: black !important;
-    font-weight: 500;
+    color: white !important;
 }
 
-/* PLACEHOLDER */
+/* placeholder */
 input::placeholder {
-    color: rgba(0, 0, 0, 0.5) !important;
+    color: rgba(255, 255, 255, 0.5) !important;
 }
 
 /* SIDEBAR */
