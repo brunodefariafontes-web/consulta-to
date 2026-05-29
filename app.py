@@ -13,12 +13,12 @@ st.set_page_config(
 )
 
 # =====================
-# FUNDO (DISCRETO)
+# FUNDO (MESMA BASE ANTERIOR)
 # =====================
 page_bg = """
 <style>
 
-/* FUNDO */
+/* FUNDO GRIPEN */
 [data-testid="stAppViewContainer"]::before{
     content: "";
     position: fixed;
@@ -32,63 +32,69 @@ page_bg = """
     background-position: center;
     background-repeat: no-repeat;
 
-    filter: brightness(0.45);
+    filter: brightness(0.50) contrast(0.95);
     z-index: -1;
 }
 
+/* fundo geral escuro */
 .stApp{
     background: rgba(0,0,0,0.60);
 }
 
+/* HEADER */
+[data-testid="stHeader"]{
+    background: rgba(0,0,0,0);
+}
+
 /* =====================
-   TÍTULO
+   TEXTO (MANTIDO LIMPO)
    ===================== */
-h1 {
+h1, h2, h3 {
     color: white !important;
-    font-size: 34px;
-    font-weight: 800;
+}
+
+p, label, span {
+    color: rgba(255,255,255,0.90) !important;
 }
 
 /* =====================
-   CARDS (MELHORA PRINCIPAL)
+   🔥 CORREÇÃO PRINCIPAL (PN VISÍVEL)
    ===================== */
 
-/* CARD GERAL */
-.block-card {
-    background: rgba(255,255,255,0.92);
-    padding: 18px;
-    border-radius: 14px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    box-shadow: 0px 4px 20px rgba(0,0,0,0.3);
+/* INPUTS mais escuros (melhor contraste com fundo) */
+div[data-baseweb="input"],
+div[data-baseweb="select"],
+.stTextInput,
+.stForm,
+.stDataFrame {
+    background: rgba(25, 25, 25, 0.75) !important;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid rgba(255,255,255,0.08);
 }
 
-/* texto dentro dos cards */
-.block-card label,
-.block-card div,
-.block-card span {
-    color: #111 !important;
-}
-
-/* INPUTS DENTRO DO CARD */
-.block-card input {
-    background: white !important;
-    color: black !important;
+/* TEXTO DO INPUT (AGORA LEGÍVEL SEM SUMIR) */
+input, textarea {
+    color: white !important;
     font-weight: 600;
 }
 
-/* BOTÃO */
+/* placeholder suave */
+input::placeholder {
+    color: rgba(255,255,255,0.5) !important;
+}
+
+/* BOTÃO VISÍVEL */
 button {
-    background: #111 !important;
-    color: white !important;
+    color: black !important;
     font-weight: 700 !important;
+    background: rgba(255,255,255,0.95) !important;
     border-radius: 8px !important;
 }
 
-/* DATAFRAME */
-.stDataFrame {
-    background: rgba(255,255,255,0.95) !important;
-    border-radius: 10px;
+/* SIDEBAR */
+[data-testid="stSidebar"]{
+    background: rgba(0,0,0,0.55);
 }
 
 </style>
@@ -122,17 +128,19 @@ dados = sheet.get_all_records()
 df = pd.DataFrame(dados)
 
 # =====================
-# HEADER
+# TITULO
 # =====================
 st.title("✈ CONSULTA T.O.")
+st.write("Pesquisa rápida de Part Number")
 
 # =====================
-# PN (AGORA DESTACADO)
+# PESQUISA (CLARA AGORA)
 # =====================
-st.markdown('<div class="block-card">', unsafe_allow_html=True)
-
 pesquisa = st.text_input("🔎 Digite o Part Number")
 
+# =====================
+# RESULTADO
+# =====================
 if pesquisa:
 
     resultado = df[
@@ -147,13 +155,10 @@ if pesquisa:
     else:
         st.error("Nenhum Part Number encontrado")
 
-st.markdown('</div>', unsafe_allow_html=True)
-
 # =====================
-# ADICIONAR ITEM (OUTRO CARD)
+# ADICIONAR ITEM
 # =====================
-st.markdown('<div class="block-card">', unsafe_allow_html=True)
-
+st.divider()
 st.subheader("➕ Adicionar Novo Item")
 
 with st.form("novo_item", clear_on_submit=True):
@@ -161,7 +166,7 @@ with st.form("novo_item", clear_on_submit=True):
     pn = st.text_input("Part Number")
     to = st.text_input("T.O.")
 
-    salvar = st.form_submit_button("SALVAR")
+    salvar = st.form_submit_button("Salvar")
 
     if salvar:
 
@@ -171,5 +176,3 @@ with st.form("novo_item", clear_on_submit=True):
             st.rerun()
         else:
             st.warning("Preencha todos os campos")
-
-st.markdown('</div>', unsafe_allow_html=True)
