@@ -13,12 +13,12 @@ st.set_page_config(
 )
 
 # =====================
-# FUNDO DISCRETO (VERSÃO BOA)
+# FUNDO GRIPEN (DISCRETO E ESTÁVEL)
 # =====================
 page_bg = """
 <style>
 
-/* FUNDO */
+/* FUNDO PRINCIPAL */
 [data-testid="stAppViewContainer"]{
 background-image: url("https://res.cloudinary.com/dkkd45ayz/image/upload/c_scale,w_2048/episerver/071584a2-31d6-4c72-bae3-343a753229e6/gripen-e_jer_4875.jpg");
 background-size: cover;
@@ -26,16 +26,16 @@ background-position: center;
 background-repeat: no-repeat;
 background-attachment: fixed;
 
-/* equilíbrio visual */
+/* suaviza imagem */
 filter: brightness(0.55) contrast(0.95);
 }
 
-/* remove overlays problemáticos */
+/* remove overlay antigo que pode quebrar layout */
 .stApp::before{
 display: none;
 }
 
-/* camada escura suave para leitura */
+/* camada escura para leitura */
 .stApp{
 background: rgba(0,0,0,0.55);
 }
@@ -46,7 +46,7 @@ background: rgba(0,0,0,0);
 }
 
 /* =====================
-   TEXTO LIMPO
+   TEXTOS (FORA DOS INPUTS)
    ===================== */
 
 h1, h2, h3 {
@@ -58,7 +58,7 @@ color: rgba(255, 255, 255, 0.90) !important;
 }
 
 /* =====================
-   INPUTS ESCUROS (MELHOR CONTRASTE)
+   INPUTS (LEGÍVEIS)
    ===================== */
 
 div[data-baseweb="input"],
@@ -71,12 +71,13 @@ div[data-baseweb="select"],
     padding: 10px;
 }
 
-/* texto dentro dos inputs */
+/* TEXTO DENTRO DOS INPUTS */
 input, textarea {
-    color: white !important;
+    color: #111111 !important;
+    font-weight: 500;
 }
 
-/* placeholder */
+/* PLACEHOLDER */
 input::placeholder {
     color: rgba(255, 255, 255, 0.5) !important;
 }
