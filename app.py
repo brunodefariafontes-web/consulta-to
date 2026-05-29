@@ -2,7 +2,7 @@ page_bg = """
 <style>
 
 /* =====================
-   FUNDO (IMAGEM)
+   FUNDO (SEGURO)
    ===================== */
 [data-testid="stAppViewContainer"]::before{
     content: "";
@@ -17,67 +17,46 @@ page_bg = """
     background-position: center;
     background-repeat: no-repeat;
 
-    /* 🔥 ESSENCIAL: ESCURECER PRA LEGIBILIDADE */
-    filter: brightness(0.35) contrast(1.05);
+    filter: brightness(0.45);
     z-index: -1;
 }
 
-/* camada escura extra (melhora MUITO leitura) */
+/* camada escura segura */
 .stApp {
-    background: rgba(0,0,0,0.55);
+    background: rgba(0,0,0,0.50);
 }
 
 /* =====================
-   TÍTULOS E TEXTO
-   ===================== */
-h1, h2, h3 {
-    color: #ffffff !important;
-}
-
-p, span, label {
-    color: #ffffff !important;
-    font-weight: 600;
-}
-
-/* =====================
-   INPUTS (CAIXA BRANCA LEGÍVEL)
+   INPUTS (SEMPRE LEGÍVEIS)
    ===================== */
 input, textarea {
-    background-color: #ffffff !important;
+    background: #ffffff !important;
     color: #000000 !important;
-    font-weight: 600 !important;
-    border-radius: 6px;
 }
 
-/* Streamlit inputs reais */
+/* Streamlit inputs */
 div[data-baseweb="input"] input,
 div[data-baseweb="textarea"] textarea {
-    background-color: #ffffff !important;
+    background: #ffffff !important;
     color: #000000 !important;
-}
-
-/* placeholder */
-input::placeholder {
-    color: rgba(0,0,0,0.45) !important;
 }
 
 /* =====================
-   TABELA RESULTADOS (IMPORTANTE)
+   LABELS (SEM QUEBRAR NADA)
    ===================== */
-[data-testid="stDataFrame"] {
-    background-color: rgba(255,255,255,0.95) !important;
-    border-radius: 8px;
+label {
+    color: #ffffff !important;
+    font-weight: 600;
 }
 
 /* =====================
    BOTÃO
    ===================== */
 .stButton > button {
-    background-color: #ffffff !important;
+    background: #ffffff !important;
     color: #000000 !important;
-    font-weight: 700 !important;
+    font-weight: 700;
     border-radius: 8px;
-    border: 1px solid rgba(0,0,0,0.2);
 }
 
 </style>
