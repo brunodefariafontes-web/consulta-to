@@ -1,99 +1,84 @@
-import streamlit as st
-import pandas as pd
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+page_bg = """
+<style>
 
-# =====================
-# CONFIG
-# =====================
-st.set_page_config(
-    page_title="Consulta T.O.",
-    page_icon="✈",
-    layout="wide"
-)
+/* =====================
+   FUNDO (IMAGEM)
+   ===================== */
+[data-testid="stAppViewContainer"]::before{
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 
-# =====================
-# GOOGLE SHEETS
-# =====================
-scope = [
-    "https://spreadsheets.google.com/feeds",
-    "https://www.googleapis.com/auth/drive"
-]
+    background-image: url("https://res.cloudinary.com/dkkd45ayz/image/upload/c_scale,w_2048/episerver/071584a2-31d6-4c72-bae3-343a753229e6/gripen-e_jer_4875.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 
-creds = ServiceAccountCredentials.from_json_keyfile_dict(
-    dict(st.secrets),
-    scope
-)
+    /* 🔥 ESSENCIAL: ESCURECER PRA LEGIBILIDADE */
+    filter: brightness(0.35) contrast(1.05);
+    z-index: -1;
+}
 
-client = gspread.authorize(creds)
+/* camada escura extra (melhora MUITO leitura) */
+.stApp {
+    background: rgba(0,0,0,0.55);
+}
 
-sheet = client.open_by_key(
-    "1jyuXzwx2x_piaro5yY7EJs7F_Ofa8u-fVnc-NGjeK5w"
-).sheet1
+/* =====================
+   TÍTULOS E TEXTO
+   ===================== */
+h1, h2, h3 {
+    color: #ffffff !important;
+}
 
-# =====================
-# DADOS
-# =====================
-dados = sheet.get_all_records()
-df = pd.DataFrame(dados)
+p, span, label {
+    color: #ffffff !important;
+    font-weight: 600;
+}
 
-# =====================
-# TITULO
-# =====================
-st.title("✈ CONSULTA T.O.")
+/* =====================
+   INPUTS (CAIXA BRANCA LEGÍVEL)
+   ===================== */
+input, textarea {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-weight: 600 !important;
+    border-radius: 6px;
+}
 
-st.write("Pesquisa rápida de Part Number")
+/* Streamlit inputs reais */
+div[data-baseweb="input"] input,
+div[data-baseweb="textarea"] textarea {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
 
-# =====================
-# PESQUISA
-# =====================
-pesquisa = st.text_input("Digite o Part Number")
+/* placeholder */
+input::placeholder {
+    color: rgba(0,0,0,0.45) !important;
+}
 
-# =====================
-# RESULTADO
-# =====================
-if pesquisa:
+/* =====================
+   TABELA RESULTADOS (IMPORTANTE)
+   ===================== */
+[data-testid="stDataFrame"] {
+    background-color: rgba(255,255,255,0.95) !important;
+    border-radius: 8px;
+}
 
-    resultado = df[
-        df.iloc[:, 0]
-        .astype(str)
-        .str.contains(pesquisa, case=False, na=False)
-    ]
+/* =====================
+   BOTÃO
+   ===================== */
+.stButton > button {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-weight: 700 !important;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.2);
+}
 
-    if not resultado.empty:
-
-        st.success(f"{len(resultado)} resultado(s) encontrado(s)")
-
-        st.dataframe(resultado, use_container_width=True)
-
-    else:
-
-        st.error("Nenhum Part Number encontrado")
-
-# =====================
-# ADICIONAR ITEM
-# =====================
-st.divider()
-
-st.subheader("➕ Adicionar Novo Item")
-
-with st.form("novo_item", clear_on_submit=True):
-
-    pn = st.text_input("Part Number")
-    to = st.text_input("T.O.")
-
-    salvar = st.form_submit_button("Salvar")
-
-    if salvar:
-
-        if pn and to:
-
-            sheet.append_row([pn, to])
-
-            st.success("Item salvo com sucesso ✔")
-
-            st.rerun()
-
-        else:
-
-            st.warning("Preencha todos os campos")
+</style>
+"""
