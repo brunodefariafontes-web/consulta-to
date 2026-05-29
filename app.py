@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # =====================
-# FUNDO (MANTIDO)
+# FUNDO (MANTIDO IGUAL)
 # =====================
 page_bg = """
 <style>
@@ -47,7 +47,7 @@ page_bg = """
 }
 
 /* =====================
-   TEXTO GERAL
+   TEXTO GERAL (MANTIDO)
    ===================== */
 h1, h2, h3 {
     color: white !important;
@@ -58,55 +58,29 @@ p, label, span {
 }
 
 /* =====================
-   INPUTS (CORRIGIDO DE VERDADE)
+   🔥 CORREÇÃO SOMENTE DO PN/T.O.
    ===================== */
 
-/* input interno do Streamlit */
+/* campo real do Streamlit */
 div[data-baseweb="input"] input,
 div[data-baseweb="textarea"] textarea {
-    color: #000000 !important;
-    font-weight: 600 !important;
+    color: #ffffff !important;
+    font-weight: 600;
 }
 
-/* fallback universal */
-input, textarea {
-    color: #000000 !important;
-    font-weight: 600 !important;
+/* fallback garantido */
+.stTextInput input,
+.stTextArea textarea {
+    color: #ffffff !important;
+    font-weight: 600;
 }
 
-/* fundo dos campos */
-div[data-baseweb="input"],
-div[data-baseweb="select"],
-.stTextInput,
-.stForm {
-    background: rgba(255,255,255,0.95) !important;
-    border-radius: 10px;
-    padding: 10px;
-}
-
-/* placeholder */
+/* placeholder (opcional, só pra não sumir) */
 input::placeholder {
-    color: rgba(0,0,0,0.4) !important;
+    color: rgba(255,255,255,0.5) !important;
 }
 
-/* =====================
-   BOTÃO SALVAR (CORRIGIDO FINAL)
-   ===================== */
-
-.stButton > button {
-    background: #ffffff !important;
-    color: #000000 !important;
-    font-weight: 800 !important;
-    border-radius: 8px !important;
-    border: 1px solid rgba(0,0,0,0.25) !important;
-}
-
-/* texto interno do botão */
-.stButton > button p {
-    color: #000000 !important;
-}
-
-/* SIDEBAR */
+/* SIDEBAR (MANTIDO) */
 [data-testid="stSidebar"]{
     background: rgba(0,0,0,0.55);
 }
