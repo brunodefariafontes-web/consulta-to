@@ -38,11 +38,16 @@ h1, h2, h3, p, span, label {
 }
 
 /* =====================
-   BOTÃO (SÓ TEXTO PRETO)
+   BOTÃO (TEXTO PRETO)
    ===================== */
 .stButton > button {
     color: #000000 !important;
     font-weight: 700 !important;
+}
+
+/* reforço para streamlit sobrescrito */
+.stButton > button p {
+    color: #000000 !important;
 }
 
 /* =====================
