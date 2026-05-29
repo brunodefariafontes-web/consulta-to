@@ -45,7 +45,7 @@ background: rgba(0,0,0,0);
 }
 
 /* =====================
-   TEXTO AJUSTADO
+   TEXTO FORA DOS INPUTS
    ===================== */
 
 h1, h2, h3 {
@@ -60,20 +60,28 @@ span, div {
 color: rgba(255, 255, 255, 0.88) !important;
 }
 
-/* INPUTS */
-input, textarea {
-color: white !important;
-}
+/* =====================
+   INPUTS BRANCOS (NOVO ESTILO)
+   ===================== */
 
-/* CAIXAS */
 div[data-baseweb="input"],
 div[data-baseweb="select"],
 .stTextInput,
-.stForm,
-.stDataFrame {
-background: rgba(20, 20, 20, 0.65) !important;
-border-radius: 10px;
-padding: 10px;
+.stForm {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* TEXTO DENTRO DOS INPUTS */
+input, textarea {
+    color: black !important;
+    font-weight: 500;
+}
+
+/* PLACEHOLDER */
+input::placeholder {
+    color: rgba(0, 0, 0, 0.5) !important;
 }
 
 /* SIDEBAR */
