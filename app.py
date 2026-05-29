@@ -1,10 +1,10 @@
 import streamlit as st
 import pandas as pd
 import gspread
-from google.oauth2.service_account import Credentials
+from oauth2client.service_account import ServiceAccountCredentials
 
 # =====================
-# CONFIG (primeiro sempre)
+# CONFIG
 # =====================
 st.set_page_config(
     page_title="Consulta T.O.",
@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # =====================
-# FUNDO DISCRETO (GRIPEN SUAVE)
+# FUNDO DISCRETO (GRIPEN)
 # =====================
 page_bg = """
 <style>
@@ -25,7 +25,6 @@ background-position: center;
 background-repeat: no-repeat;
 background-attachment: fixed;
 
-/* SUAVIZA O FUNDO */
 filter: brightness(0.55) contrast(0.95);
 }
 
@@ -33,7 +32,6 @@ filter: brightness(0.55) contrast(0.95);
 background: rgba(0,0,0,0);
 }
 
-/* CAMADA ESCURA PARA NÃO DISTRAIR */
 .stApp::before{
 content: "";
 position: absolute;
@@ -45,22 +43,15 @@ background: rgba(0,0,0,0.55);
 z-index: 0;
 }
 
-/* CONTEÚDO ACIMA DO FUNDO */
 .stApp > div {
 position: relative;
 z-index: 1;
 }
 
-.stApp{
-color: white;
-}
-
-/* TEXTO LIMPO */
 h1, h2, h3, p, label, div{
 color: white !important;
 }
 
-/* SIDEBAR */
 [data-testid="stSidebar"]{
 background: rgba(0,0,0,0.45);
 }
@@ -74,13 +65,13 @@ st.markdown(page_bg, unsafe_allow_html=True)
 # GOOGLE SHEETS
 # =====================
 scope = [
-    "https://www.googleapis.com/auth/spreadsheets",
+    "https://spreadsheets.google.com/feeds",
     "https://www.googleapis.com/auth/drive"
 ]
 
-creds = Credentials.from_service_account_info(
-    st.secrets["gcp_service_account"],
-    scopes=scope
+creds = ServiceAccountCredentials.from_json_keyfile_dict(
+    dict(st.secrets),
+    scope
 )
 
 client = gspread.authorize(creds)
@@ -92,22 +83,13 @@ sheet = client.open_by_key(
 # =====================
 # DADOS
 # =====================
-@st.cache_data(ttl=30)
-def carregar_dados():
-    dados = sheet.get_all_records()
-    return pd.DataFrame(dados)
-
-df = carregar_dados()
+dados = sheet.get_all_records()
+df = pd.DataFrame(dados)
 
 # =====================
-# HEADER
+# TITULO
 # =====================
 st.title("✈ CONSULTA T.O.")
-
-st.image(
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Bras%C3%A3o_da_For%C3%A7a_A%C3%A9rea_Brasileira.svg/800px-Bras%C3%A3o_da_For%C3%A7a_A%C3%A9rea_Brasileira.svg.png",
-    width=110
-)
 
 st.write("Pesquisa rápida de Part Number")
 
@@ -116,6 +98,9 @@ st.write("Pesquisa rápida de Part Number")
 # =====================
 pesquisa = st.text_input("Digite o Part Number")
 
+# =====================
+# RESULTADO
+# =====================
 if pesquisa:
 
     resultado = df[
@@ -125,15 +110,20 @@ if pesquisa:
     ]
 
     if not resultado.empty:
+
         st.success(f"{len(resultado)} resultado(s) encontrado(s)")
+
         st.dataframe(resultado, use_container_width=True)
+
     else:
+
         st.error("Nenhum Part Number encontrado")
 
 # =====================
 # ADICIONAR ITEM
 # =====================
 st.divider()
+
 st.subheader("➕ Adicionar Novo Item")
 
 with st.form("novo_item", clear_on_submit=True):
@@ -144,14 +134,15 @@ with st.form("novo_item", clear_on_submit=True):
     salvar = st.form_submit_button("Salvar")
 
     if salvar:
+
         if pn and to:
 
             sheet.append_row([pn, to])
 
             st.success("Item salvo com sucesso ✔")
 
-            st.cache_data.clear()
             st.rerun()
 
         else:
+
             st.warning("Preencha todos os campos")
