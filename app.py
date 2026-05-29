@@ -13,12 +13,28 @@ st.set_page_config(
 )
 
 # =====================
-# CSS (SEGURO E FUNCIONAL)
+# CSS FINAL (FUNDO D'ÁGUA FRACO)
 # =====================
 st.markdown("""
 <style>
 
-/* INPUTS BRANCOS */
+/* =====================
+   FUNDO D'ÁGUA (BEM FRACO)
+   ===================== */
+.stApp {
+    background-image: url("https://res.cloudinary.com/dkkd45ayz/image/upload/f_auto,dpr_auto,q_auto,fl_progressive/w_2048,h_1152,c_scale/episerver/071584a2-31d6-4c72-bae3-343a753229e6/gripen-e_jer_4875.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* efeito marca d'água */
+    background-blend-mode: overlay;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+/* =====================
+   INPUTS (BRANCO + PRETO)
+   ===================== */
 .stTextInput input,
 .stTextArea textarea {
     background-color: #ffffff !important;
@@ -28,16 +44,24 @@ st.markdown("""
     border-radius: 6px !important;
 }
 
-/* INPUTS INTERNOS STREAMLIT */
+/* Streamlit inputs internos */
 div[data-baseweb="input"] input,
 div[data-baseweb="textarea"] textarea {
     background-color: #ffffff !important;
     color: #000000 !important;
 }
 
-/* PLACEHOLDER */
+/* placeholder */
 input::placeholder {
     color: rgba(0,0,0,0.4) !important;
+}
+
+/* BOTÃO */
+.stButton > button {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-weight: 700 !important;
+    border-radius: 6px;
 }
 
 </style>
