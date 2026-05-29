@@ -2,7 +2,7 @@ page_bg = """
 <style>
 
 /* =====================
-   FUNDO (NÃO MEXE)
+   FUNDO (SEGURA E ESTÁVEL)
    ===================== */
 [data-testid="stAppViewContainer"]::before{
     content: "";
@@ -17,41 +17,35 @@ page_bg = """
     background-position: center;
     background-repeat: no-repeat;
 
-    filter: brightness(0.50) contrast(0.95);
+    filter: brightness(0.55);
     z-index: -1;
 }
 
-/* camada escura (segura) */
 .stApp{
-    background: rgba(0,0,0,0.60);
+    background: rgba(0,0,0,0.55);
 }
 
 /* =====================
-   TEXTO SEGURO (SÓ O NECESSÁRIO)
+   🔥 ÚNICA REGRA IMPORTANTE (INPUTS)
    ===================== */
-h1, h2, h3 {
-    color: white !important;
+input {
+    background: white !important;
+    color: black !important;
 }
 
+/* Streamlit inputs reais */
+div[data-baseweb="input"] input,
+div[data-baseweb="textarea"] textarea {
+    background: white !important;
+    color: black !important;
+}
+
+/* =====================
+   LABELS (SÓ ISSO)
+   ===================== */
 label {
     color: white !important;
-    font-weight: 700 !important;
-}
-
-/* =====================
-   🔥 INPUTS (PN / T.O.)
-   ===================== */
-.stTextInput input,
-.stTextArea textarea,
-input, textarea {
-    background-color: #ffffff !important;
-    color: #000000 !important;
-    font-weight: 600 !important;
-}
-
-/* placeholder */
-input::placeholder {
-    color: rgba(0,0,0,0.4) !important;
+    font-weight: 700;
 }
 
 /* =====================
@@ -60,8 +54,7 @@ input::placeholder {
 .stButton > button {
     background: white !important;
     color: black !important;
-    font-weight: 700 !important;
-    border-radius: 8px !important;
+    font-weight: 700;
 }
 
 </style>
