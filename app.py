@@ -13,34 +13,18 @@ st.set_page_config(
 )
 
 # =====================
-# CSS (SÓ TEXTO FIXO EM BRANCO)
+# CSS (SÓ BOTÃO EM BRANCO)
 # =====================
 st.markdown("""
 <style>
 
 /* =====================
-   TEXTO FIXO (LABELS + TÍTULOS)
+   BOTÃO (SÓ TEXTO BRANCO)
    ===================== */
-label {
-    color: #ffffff !important;
-    font-weight: 600 !important;
-}
-
-h1, h2, h3 {
-    color: #ffffff !important;
-}
-
-p, span {
-    color: #ffffff !important;
-}
-
-/* botão texto */
 .stButton > button {
     color: #ffffff !important;
     font-weight: 700 !important;
 }
-
-/* NÃO mexe em inputs nem tabela */
 
 </style>
 """, unsafe_allow_html=True)
