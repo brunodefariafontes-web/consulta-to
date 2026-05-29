@@ -13,25 +13,59 @@ st.set_page_config(
 )
 
 # =====================
-# CSS LIMPO (CORRETO)
+# CSS (FUNDO D'ÁGUA + TEXTO BRANCO)
 # =====================
 st.markdown("""
 <style>
 
-/* títulos */
+/* =====================
+   FUNDO D'ÁGUA
+   ===================== */
+.stApp {
+    background-image: url("https://res.cloudinary.com/dkkd45ayz/image/upload/f_auto,dpr_auto,q_auto,fl_progressive/w_2048,h_1152,c_scale/episerver/071584a2-31d6-4c72-bae3-343a753229e6/gripen-e_jer_4875.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* efeito d'água */
+    background-color: rgba(0,0,0,0.88);
+    background-blend-mode: darken;
+}
+
+/* =====================
+   TEXTO FIXO BRANCO
+   ===================== */
 h1, h2, h3 {
-    color: #ffffff !important;
+    color: white !important;
 }
 
-/* textos fixos */
 p, span, label {
-    color: #ffffff !important;
+    color: white !important;
 }
 
-/* botão */
+/* botão branco */
 .stButton > button {
-    color: #ffffff !important;
+    color: white !important;
     font-weight: 700 !important;
+}
+
+/* =====================
+   INPUTS (NÃO ALTERA VISUAL)
+   ===================== */
+.stTextInput input,
+.stTextArea textarea {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+div[data-baseweb="input"] input,
+div[data-baseweb="textarea"] textarea {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+input::placeholder {
+    color: rgba(0,0,0,0.4) !important;
 }
 
 </style>
