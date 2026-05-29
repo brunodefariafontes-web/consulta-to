@@ -36,31 +36,28 @@ page_bg = """
     z-index: -1;
 }
 
-/* fundo geral */
 .stApp{
     background: rgba(0,0,0,0.60);
 }
 
 /* =====================
-   LABELS VISÍVEIS
+   LABELS
    ===================== */
 label {
     color: #000000 !important;
     font-weight: 700 !important;
 }
 
-/* títulos */
 h1, h2, h3 {
     color: white !important;
 }
 
-/* textos gerais */
 p, span {
     color: rgba(255,255,255,0.90) !important;
 }
 
 /* =====================
-   INPUTS (BRANCO + TEXTO PRETO)
+   INPUTS (BUSCA + FORM + ADICIONAR ITEM)
    ===================== */
 input, textarea {
     background-color: #ffffff !important;
@@ -68,7 +65,7 @@ input, textarea {
     font-weight: 600 !important;
 }
 
-/* Streamlit input real */
+/* Streamlit base inputs */
 div[data-baseweb="input"] input,
 div[data-baseweb="textarea"] textarea {
     background-color: #ffffff !important;
@@ -76,9 +73,16 @@ div[data-baseweb="textarea"] textarea {
     font-weight: 600 !important;
 }
 
-/* caixa externa */
+/* caixas dos inputs (inclusive form) */
 .stTextInput, .stTextArea {
     background-color: #ffffff !important;
+}
+
+/* FORMULÁRIO (IMPORTANTE — aqui estava faltando) */
+.stForm {
+    background: rgba(255,255,255,0.08) !important;
+    padding: 15px;
+    border-radius: 10px;
 }
 
 /* placeholder */
@@ -86,9 +90,7 @@ input::placeholder {
     color: rgba(0,0,0,0.4) !important;
 }
 
-/* =====================
-   BOTÃO
-   ===================== */
+/* BOTÃO */
 .stButton > button {
     background: #ffffff !important;
     color: #000000 !important;
@@ -156,7 +158,7 @@ if pesquisa:
         st.error("Nenhum Part Number encontrado")
 
 # =====================
-# ADICIONAR ITEM
+# ADICIONAR ITEM (CORRIGIDO IGUAL PN)
 # =====================
 st.divider()
 st.subheader("➕ Adicionar Novo Item")
