@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # =====================
-# FUNDO (MESMA BASE ANTERIOR)
+# FUNDO (MANTIDO COMO ESTAVA BOM)
 # =====================
 page_bg = """
 <style>
@@ -36,7 +36,7 @@ page_bg = """
     z-index: -1;
 }
 
-/* fundo geral escuro */
+/* fundo geral */
 .stApp{
     background: rgba(0,0,0,0.60);
 }
@@ -47,7 +47,7 @@ page_bg = """
 }
 
 /* =====================
-   TEXTO (MANTIDO LIMPO)
+   TEXTO GERAL
    ===================== */
 h1, h2, h3 {
     color: white !important;
@@ -58,38 +58,41 @@ p, label, span {
 }
 
 /* =====================
-   🔥 CORREÇÃO PRINCIPAL (PN VISÍVEL)
+   INPUTS (PN E T.O.)
    ===================== */
-
-/* INPUTS mais escuros (melhor contraste com fundo) */
 div[data-baseweb="input"],
 div[data-baseweb="select"],
 .stTextInput,
-.stForm,
-.stDataFrame {
+.stForm {
     background: rgba(25, 25, 25, 0.75) !important;
     border-radius: 10px;
     padding: 10px;
-    border: 1px solid rgba(255,255,255,0.08);
 }
 
-/* TEXTO DO INPUT (AGORA LEGÍVEL SEM SUMIR) */
+/* 🔥 TEXTO QUE VOCÊ DIGITA (AGORA CORRETO) */
 input, textarea {
-    color: white !important;
+    color: #ffffff !important;
     font-weight: 600;
 }
 
-/* placeholder suave */
+/* placeholder */
 input::placeholder {
     color: rgba(255,255,255,0.5) !important;
 }
 
-/* BOTÃO VISÍVEL */
-button {
-    color: black !important;
-    font-weight: 700 !important;
-    background: rgba(255,255,255,0.95) !important;
+/* =====================
+   🔥 BOTÃO SALVAR (CORRIGIDO)
+   ===================== */
+button[kind="primary"] {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-weight: 800 !important;
     border-radius: 8px !important;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+
+button {
+    color: #000000 !important;
 }
 
 /* SIDEBAR */
@@ -134,7 +137,7 @@ st.title("✈ CONSULTA T.O.")
 st.write("Pesquisa rápida de Part Number")
 
 # =====================
-# PESQUISA (CLARA AGORA)
+# PESQUISA
 # =====================
 pesquisa = st.text_input("🔎 Digite o Part Number")
 
