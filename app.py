@@ -91,4 +91,3 @@ if pesquisa:
         st.error(
             "Part Number não encontrado"
         )
-```
