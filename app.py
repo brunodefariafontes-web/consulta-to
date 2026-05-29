@@ -13,12 +13,14 @@ st.set_page_config(
 )
 
 # =====================
-# FUNDO (FIX REAL PC + MOBILE IGUAL)
+# FUNDO (PC + MOBILE DIFERENTE)
 # =====================
 page_bg = """
 <style>
 
-/* FUNDO FIXO REAL (resolve mobile) */
+/* =========================
+   DESKTOP (horizontal)
+   ========================= */
 [data-testid="stAppViewContainer"]::before{
     content: "";
     position: fixed;
@@ -36,7 +38,21 @@ page_bg = """
     z-index: -1;
 }
 
-/* remove fundo padrão branco do Streamlit */
+/* =========================
+   MOBILE (simula imagem "em pé")
+   ========================= */
+@media only screen and (max-width: 768px) {
+
+[data-testid="stAppViewContainer"]::before{
+    background-image: url("https://res.cloudinary.com/dkkd45ayz/image/upload/c_scale,w_2048/episerver/071584a2-31d6-4c72-bae3-343a753229e6/gripen-e_jer_4875.jpg");
+
+    /* recorte vertical simulado */
+    background-position: center top;
+    background-size: 200% auto;
+}
+}
+
+/* fundo geral */
 .stApp{
 background: rgba(0,0,0,0.55);
 }
@@ -47,42 +63,39 @@ background: rgba(0,0,0,0);
 }
 
 /* =====================
-   PADRÃO VISUAL (BLOCO ÚNICO TIPO "PAINEL")
+   TEXTO GERAL
    ===================== */
-
-/* tudo dentro do app fica alinhado em bloco */
-.block-container{
-max-width: 1100px;
-padding-top: 2rem;
-padding-bottom: 2rem;
+h1, h2, h3 {
+color: white !important;
 }
 
-/* caixas principais (input + form + tabela) */
+p, label, span {
+color: rgba(255,255,255,0.92) !important;
+}
+
+/* =====================
+   INPUTS (CORRETO AGORA)
+   ===================== */
+input, textarea {
+color: black !important;
+font-weight: 500;
+}
+
+/* caixas */
 div[data-baseweb="input"],
 div[data-baseweb="select"],
 .stTextInput,
 .stForm,
 .stDataFrame {
-    background: rgba(20, 20, 20, 0.70) !important;
-    border-radius: 12px;
-    padding: 12px;
-    margin-bottom: 10px;
+    background: rgba(255,255,255,0.95) !important;
+    border-radius: 10px;
+    padding: 10px;
 }
 
-/* INPUTS */
-input, textarea {
-    color: white !important;
-    font-weight: 500;
-}
-
-/* placeholder */
-input::placeholder {
-    color: rgba(255, 255, 255, 0.5) !important;
-}
-
-/* TEXTO GERAL */
-h1, h2, h3, p, label, span {
-    color: rgba(255,255,255,0.92) !important;
+/* BOTÃO VISÍVEL */
+button {
+color: black !important;
+font-weight: 600;
 }
 
 /* SIDEBAR */
@@ -127,10 +140,9 @@ st.title("✈ CONSULTA T.O.")
 st.write("Pesquisa rápida de Part Number")
 
 # =====================
-# PESQUISA (BLOCO PADRÃO)
+# PESQUISA
 # =====================
-with st.container():
-    pesquisa = st.text_input("Digite o Part Number")
+pesquisa = st.text_input("Digite o Part Number")
 
 # =====================
 # RESULTADO
@@ -150,27 +162,26 @@ if pesquisa:
         st.error("Nenhum Part Number encontrado")
 
 # =====================
-# ADICIONAR ITEM (MESMO PADRÃO VISUAL)
+# ADICIONAR ITEM
 # =====================
 st.divider()
 st.subheader("➕ Adicionar Novo Item")
 
-with st.container():
-    with st.form("novo_item", clear_on_submit=True):
+with st.form("novo_item", clear_on_submit=True):
 
-        pn = st.text_input("Part Number")
-        to = st.text_input("T.O.")
+    pn = st.text_input("Part Number")
+    to = st.text_input("T.O.")
 
-        salvar = st.form_submit_button("Salvar")
+    salvar = st.form_submit_button("Salvar")
 
-        if salvar:
+    if salvar:
 
-            if pn and to:
+        if pn and to:
 
-                sheet.append_row([pn, to])
+            sheet.append_row([pn, to])
 
-                st.success("Item salvo com sucesso ✔")
-                st.rerun()
+            st.success("Item salvo com sucesso ✔")
+            st.rerun()
 
-            else:
-                st.warning("Preencha todos os campos")
+        else:
+            st.warning("Preencha todos os campos")
